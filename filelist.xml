@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentpackage name="WeaponsFlashlightAttachment" path="Mods/WeaponsFlashlightAttachment/filelist.xml" corepackage="false" gameversion="0.15.23.0">
+  <Item file="Mods/WeaponsFlashlightAttachment/wfa_weapons.xml" />
+</contentpackage>
