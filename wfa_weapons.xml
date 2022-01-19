@@ -21,7 +21,25 @@
     <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="128,64,64,64" origin="0.5,0.5" />
     <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="0,418,76,41" depth="0.55" origin="0.5,0.5" />
     <Body width="72" height="40" density="50" />
-    <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect" />
+
+    <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,5" handle1="-25,-7" msg="ItemMsgPickUpSelect">
+         <!-- <StatusEffect type="OnActive" targettype="Contained" Condition="-0.2">
+            <RequiredItem items="batterycell" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" targettype="Contained" Condition="-0.1">
+            <RequiredItem items="fulguriumbatterycell" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" targettype="Contained" Condition="-0.2">
+            <RequiredItem excludedidentifiers="batterycell,fulguriumbatterycell" type="Contained" />
+        </StatusEffect>  -->
+        <!-- the child LightComponent is only active when the Holdable is active, i.e. when the item is being held -->  
+        <!-- <LightComponent LightColor="0.5,0.5,0.5,1.0" Flicker="0.02" range="1000" powerconsumption="10" IsOn="true">
+            <LightTexture texture="Content/Lights/lightcone.png" origin="0.0, 0.5" size="1.0,1.0" />
+        </LightComponent> -->
+    </Holdable>
+
+
+
     <RangedWeapon barrelpos="29,11" spread="0" unskilledspread="2" combatPriority="70" drawhudwhenequipped="true" crosshairscale="0.2">
       <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
       <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
@@ -37,16 +55,27 @@
     </RangedWeapon>
 
 
-    <!-- CHANGES ARE HERE -->
+
+      <LightComponent range="300.0" LightColor="0.5,0.5,0.5,1.0" powerconsumption="4" IsOn="true" Flicker="0.2">
+        <StatusEffect type="Always" target="This,Character" Voltage="1.0" setvalue="true">
+          <Conditional IsDead="false" />
+            <RequiredItem items="batterycell" type="Contained" />
+        </StatusEffect>
+        <StatusEffect type="OnActive" targettype="Contained"  targetslot="1" Condition="-0.2">
+            <RequiredItem items="batterycell" type="Contained" />
+        </StatusEffect>
+        <LightTexture texture="Content/Lights/lightcone.png" origin="-0.001, 0.49" size="1.0,0.8" />
+      </LightComponent>
 
     <ItemContainer capacity="1" maxstacksize="6" hideitems="true" containedstateindicatorstyle="bullet" containedstateindicatorslot="0" slotsperrow="1">
-      <Containable items="revolverammo" />
+        <Containable items="revolverammo" />
   
-        <SubContainer capacity="1" maxstacksize="64" containedstateindicatorstyle="battery">
+        <SubContainer capacity="1" maxstacksize="1" containedstateindicatorstyle="battery">
             <Containable items="mobilebattery" />
         </SubContainer>    
-    
-    
+
+
+
     </ItemContainer>
     <aitarget sightrange="2000" soundrange="5000" fadeouttime="5" />
     <Quality>
